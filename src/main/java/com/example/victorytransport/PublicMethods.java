@@ -220,7 +220,7 @@ public class PublicMethods {
         while (isContinue) {
             Line line = new Line();
             line.setStrokeWidth(5.0);
-            line.setStroke(Color.BLACK);
+            line.setStroke(Color.WHITESMOKE);
             line.setVisible(true);
 
             if ((p - 1) % 10 == (startCellId - 1) % 10 && (p - 1) / 10 == (startCellId - 1) / 10) {
