@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class SaveLoad {
-    public void save(Level level) {
+    public void save(Level level,double score) {
         File saveFile = new File("saveFile.txt");
         try {
             FileWriter fileWriter = new FileWriter(saveFile);
@@ -37,12 +37,31 @@ public class SaveLoad {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        File scoreFile = new File("scoreFile.txt");
+        try {
+            FileWriter fileWriter = new FileWriter(scoreFile);
+            fileWriter.write(String.valueOf(score));
+            fileWriter.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
     //Loading level
     public Level load(){
         File saveFile = new File("saveFile.txt");
         Level level = new Level(saveFile);
         return level;
+    }
+    public double loadScore(){
+        File scoreFile = new File("scoreFile.txt");
+        double score = 0;
+        try {
+            score = Double.parseDouble(String.valueOf(scoreFile));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return score;
     }
 
 }

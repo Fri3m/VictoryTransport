@@ -154,12 +154,13 @@ public class LevelFX extends Application {
 
         MenuItem menuSave = new MenuItem("Save");
         menuSave.setOnAction(e -> {
-            saveLoad.save(level);
+            saveLoad.save(level,score);
         });
 
         MenuItem menuLoad = new MenuItem("Load");
         menuLoad.setOnAction(e -> {
             LevelFX levelFX=new LevelFX(new File("saveFile.txt"));
+            levelFX.score=saveLoad.loadScore();
             try {
                 levelFX.start(stage);
             } catch (IOException ex) {
