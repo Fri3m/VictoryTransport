@@ -2,7 +2,6 @@ package com.example.victorytransport;
 
 import javafx.animation.PathTransition;
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -24,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static javafx.application.Application.launch;
 
 public class LevelFX extends Application {
 
@@ -54,7 +52,7 @@ public class LevelFX extends Application {
         BorderPane borderPane1 = new BorderPane();
         Scene scene = new Scene(borderPane1, 800, 600);
         stage.setResizable(false);
-        stage.setTitle("project!");
+        stage.setTitle("Victory Transport");
         stage.setScene(scene);
         stage.show();
 
