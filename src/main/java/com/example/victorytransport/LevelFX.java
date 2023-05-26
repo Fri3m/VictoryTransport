@@ -106,7 +106,7 @@ public class LevelFX extends Application {
         BorderPane rightBorderPane = new BorderPane();
         rightBorderPane.setMinSize(200, 600);
         rightBorderPane.setMaxSize(200, 600);
-        rightBorderPane.setStyle("-fx-background-color: green ");
+        rightBorderPane.setStyle("-fx-background-color: #ffb700 ");
         borderPane1.setRight(rightBorderPane);
         BorderPane borderPaneTop = new BorderPane();
         rightBorderPane.setTop(borderPaneTop);
@@ -228,7 +228,7 @@ public class LevelFX extends Application {
         //Left Side of Scene
         Pane pane1 = new Pane();
         pane1.setPrefSize(600, 600);
-        pane1.setStyle("-fx-background-color: grey");
+        pane1.setStyle("-fx-background-color: #1d1e31");
         borderPane1.setLeft(pane1);
 
         //Vehicle start
@@ -255,6 +255,7 @@ public class LevelFX extends Application {
             if (level.levelMap[i] instanceof City) {
                 int a = ((City) level.levelMap[i]).getName().length();
                 Text cityText = new Text(((City) level.levelMap[i]).getName());
+                cityText.setFill(Color.YELLOW);
                 double x = (((City) level.levelMap[i]).getCellID() - 1) % 10 * 60 + 10;
                 double y = (((City) level.levelMap[i]).getCellID() - 1) / 10 * 60 + 70;
 

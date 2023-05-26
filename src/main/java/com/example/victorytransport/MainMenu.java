@@ -49,7 +49,7 @@ public class MainMenu extends Application {
         Pane bottomPane = new Pane();
         bottomPane.setMaxSize(800,500);
         bottomPane.setMinSize(800,500);
-        bottomPane.setStyle("-fx-background-color: yellow");
+        bottomPane.setStyle("-fx-background-color: YELLOW ");
         borderPane1.setBottom(bottomPane);
 
 
