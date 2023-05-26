@@ -1,3 +1,9 @@
+//150121046 Ömer Can Şimşek
+//150121044 Ömer Yıldırım
+//150121038 Batuhan Kurt
+
+//This class gives city objects to other classes.
+
 package package1;
 
 public class CityArrangement {

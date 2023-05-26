@@ -1,3 +1,9 @@
+//150121046 Ömer Can Şimşek
+//150121044 Ömer Yıldırım
+//150121038 Batuhan Kurt
+
+//This class is a city class. It has name, cellID, cityID and passengerList attributes.
+
 package package1;
 import java.util.ArrayList;
 

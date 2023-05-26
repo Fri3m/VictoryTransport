@@ -1,3 +1,9 @@
+//150121046 Ömer Can Şimşek
+//150121044 Ömer Yıldırım
+//150121038 Batuhan Kurt
+
+//This class includes almost all methods that we need in the program
+
 package com.example.victorytransport;
 
 import javafx.animation.Interpolator;
