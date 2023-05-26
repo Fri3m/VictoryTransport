@@ -276,7 +276,7 @@ public class PublicMethods {
                 lineList.add(line);
                 isContinue = false;
             }
-            if ((p - 1) % 10 > (startCellId - 1) % 10 && (p - 1) / 10 > (startCellId - 1) / 10) {//eğer sağ aşağıda ise
+            if ((p - 1) % 10 > (startCellId - 1) % 10 && (p - 1) / 10 > (startCellId - 1) / 10) {//This block is used if the destination city is on the lower right
                 if (p == startCellId) {
                     isContinue = false;
                 }
@@ -363,7 +363,7 @@ public class PublicMethods {
                 } else {
                     return drawLines(levelMap, endCellId, startCellId);
                 }
-            } else if ((p - 1) % 10 > (startCellId - 1) % 10 && (p - 1) / 10 < (startCellId - 1) / 10) {//eğer sağ yukarda ise
+            } else if ((p - 1) % 10 > (startCellId - 1) % 10 && (p - 1) / 10 < (startCellId - 1) / 10) {//This block is used if the destination city is in the upper right.
                 if (p == startCellId) {
                     isContinue = false;
                 }
@@ -450,7 +450,7 @@ public class PublicMethods {
                 } else {
                     return drawLines(levelMap, endCellId, startCellId);
                 }
-            } else if ((p - 1) % 10 < (startCellId - 1) % 10 && (p - 1) / 10 > (startCellId - 1) / 10) {//eğer sol aşağıda ise
+            } else if ((p - 1) % 10 < (startCellId - 1) % 10 && (p - 1) / 10 > (startCellId - 1) / 10) {//This block is used if the destination city is in the lower left.
                 if (p == startCellId) {
                     isContinue = false;
                 }
@@ -537,7 +537,7 @@ public class PublicMethods {
                 } else {
                     return drawLines(levelMap, endCellId, startCellId);
                 }
-            } else if ((p - 1) % 10 < (startCellId - 1) % 10 && (p - 1) / 10 < (startCellId - 1) / 10) {//eğer sol yukarda ise
+            } else if ((p - 1) % 10 < (startCellId - 1) % 10 && (p - 1) / 10 < (startCellId - 1) / 10) {//This block is used if the destination city is in the upper left.
                 if (p == startCellId) {
                     isContinue = false;
                 }
@@ -629,7 +629,7 @@ public class PublicMethods {
 
 
             //EŞİTLİKLER
-            else if ((p - 1) % 10 > (startCellId - 1) % 10 && (p - 1) / 10 == (startCellId - 1) / 10) {//eğer sağında ise
+            else if ((p - 1) % 10 > (startCellId - 1) % 10 && (p - 1) / 10 == (startCellId - 1) / 10) {//This block is used if the target city is to the right.
                 if (p == startCellId) {
                     isContinue = false;
                 }
@@ -719,7 +719,7 @@ public class PublicMethods {
                 } else {
                     return drawLines(levelMap, endCellId, startCellId);
                 }
-            } else if ((p - 1) % 10 < (startCellId - 1) % 10 && (p - 1) / 10 == (startCellId - 1) / 10) {//eğer solunda ise
+            } else if ((p - 1) % 10 < (startCellId - 1) % 10 && (p - 1) / 10 == (startCellId - 1) / 10) {//This block is used if the target city is to the left.
                 if (p == startCellId) {
                     isContinue = false;
                 }
@@ -806,7 +806,7 @@ public class PublicMethods {
                 } else {
                     return drawLines(levelMap, endCellId, startCellId);
                 }
-            } else if ((p - 1) % 10 == (startCellId - 1) % 10 && (p - 1) / 10 < (startCellId - 1) / 10) {//eğer yukarda ise
+            } else if ((p - 1) % 10 == (startCellId - 1) % 10 && (p - 1) / 10 < (startCellId - 1) / 10) {//This block is used if the destination city is above.
                 if (p == startCellId) {
                     isContinue = false;
                 }
@@ -898,7 +898,7 @@ public class PublicMethods {
                 } else {
                     return drawLines(levelMap, endCellId, startCellId);
                 }
-            } else if ((p - 1) % 10 == (startCellId - 1) % 10 && (p - 1) / 10 > (startCellId - 1) / 10) {//eğer aşağıda ise
+            } else if ((p - 1) % 10 == (startCellId - 1) % 10 && (p - 1) / 10 > (startCellId - 1) / 10) {//This block is used if the destination city is below.
 
                 if (p == startCellId) {
                     isContinue = false;
