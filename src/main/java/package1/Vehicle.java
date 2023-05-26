@@ -47,7 +47,6 @@ public class Vehicle {
             if (passengerArray[i].destinationCityID == end.getCityID()) {
                 exitTheVehicle += passengerArray[i].numberOfPassengers;
                 income += ((double)passengerArray[i].numberOfPassengers) * ((double)passengerArray[i].getDistance() * 0.2);
-                System.out.println((double)passengerArray[i].getDistance());
                 passengerArray[i] = null;
             }
         }

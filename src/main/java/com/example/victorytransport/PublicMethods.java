@@ -80,8 +80,8 @@ public class PublicMethods {
         if (lines.isEmpty()) {
             return new ArrayList<>();
         } else {
-            double x = 3.0 / lines.size();
-            duration1 = Duration.seconds(x);
+            double x = 2500 / lines.size();
+            duration1 = Duration.millis(x);
         }
         int startCityX = (startCellID - 1) % 10 * 60 + 30;
         int startCityY = (startCellID - 1) / 10 * 60 + 30;

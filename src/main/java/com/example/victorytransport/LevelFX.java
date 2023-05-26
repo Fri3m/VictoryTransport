@@ -136,7 +136,6 @@ public class LevelFX extends Application {
         if ((levelNumber > 0) && (levelNumber < 5)) {
             menuNextLevel.setDisable(true);
             menuNextLevel.setOnAction(e -> {
-                System.out.println(levelNumber + 1);
                 String whichLevelx = "level" + (levelNumber + 1) + ".txt";
                 LevelFX levelFX = new LevelFX(new File(whichLevelx));
                 try {
@@ -355,7 +354,7 @@ public class LevelFX extends Application {
                 }
             });
             Timeline timeline = new Timeline();
-            KeyFrame keyFrame = new KeyFrame(Duration.seconds(3));
+            KeyFrame keyFrame = new KeyFrame(Duration.millis(2500));
             timeline.getKeyFrames().add(keyFrame);
             timeline.setOnFinished(finishedEvent -> {
                 driveButton.setDisable(false);
