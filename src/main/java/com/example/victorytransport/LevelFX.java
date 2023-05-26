@@ -27,23 +27,59 @@ import java.util.concurrent.atomic.AtomicReference;
 public class LevelFX extends Application {
 
     public LevelFX() {
+        levelFile = new File("level1.txt");
+        level = new Level(levelFile);
+        levelNumber = 1;
     }
 
     public LevelFX(File levelFile) {
         this.levelFile = levelFile;
-        level = new Level(levelFile);
+        this.level = new Level(levelFile);
+        Level level1 = new Level(new File("level1.txt"));
+        Level level2 = new Level(new File("level2.txt"));
+        Level level3 = new Level(new File("level3.txt"));
+        Level level4 = new Level(new File("level4.txt"));
+        Level level5 = new Level(new File("level5.txt"));
+
+        ArrayList<Level> levels = new ArrayList<>();
+        levels.add(this.level);
+        levels.add(level1);
+        levels.add(level2);
+        levels.add(level3);
+        levels.add(level4);
+        levels.add(level5);
+        boolean isOK = false;
+        for (int j = 1; j < 6; j++) {
+            for (int i = 0; i < 101; i++) {
+                if (levels.get(0).levelMap[i] != null && levels.get(j).levelMap[i] != null) {
+                    if (levels.get(0).levelMap[i].getClass().equals(levels.get(j).levelMap[i].getClass())) {
+                        isOK = true;
+                        System.out.println("OK");
+                    } else {
+                        isOK = false;
+                        System.out.println("Not OK");
+                    }
+                }
+            }
+            if (isOK) {
+                levelNumber = j;
+                break;
+            }
+
+        }
+        levelNumber=0;
     }
 
     PublicMethods publicMethods = new PublicMethods();
-    File levelFile = new File("level4.txt");
-    Level level = new Level(levelFile);
+    File levelFile;
+    Level level;
 
     String whereIsVehicle = "Istanbul";
     AtomicReference<String> toWhere = new AtomicReference<>("");
     ArrayList<Line> lines = new ArrayList<>();
     ArrayList<Circle> circleImages = new ArrayList<>();
 
-    int cost;
+    int cost, levelNumber;
     double score;
 
     public void start(Stage stage) throws IOException {
@@ -66,6 +102,20 @@ public class LevelFX extends Application {
         rightBorderPane.setTop(borderPaneTop);
 
 
+        //Score Label Start
+        Label scoreLabel = new Label("Score: " + score);
+        borderPaneTop.setLeft(scoreLabel);
+        //Score Label End
+
+
+        //Level Label Start
+        if (levelNumber > 0 && levelNumber < 6) {
+            Label levelLabel = new Label("Level: " + levelNumber);
+            levelLabel.setText("Level: " + levelNumber);
+            borderPaneTop.setRight(levelLabel);
+        }
+        //Level Label End
+
         //Menu Button start
         MenuButton menuButton = new MenuButton("Menu");
         menuButton.setMaxSize(200, 30);
@@ -73,15 +123,10 @@ public class LevelFX extends Application {
         borderPaneTop.setTop(menuButton);
 
 
-        String whichLevel = levelFile.getPath();
-        int levelNumber = Integer.parseInt(whichLevel.substring(whichLevel.length() - 5, whichLevel.length() - 4));
         if (levelNumber > 0 && levelNumber < 5) {
             MenuItem menuNextLevel = new MenuItem("Next Level");
             menuNextLevel.setOnAction(e -> {
-                String whichLevelx = levelFile.getPath();
-                int levelNumberx = Integer.parseInt(whichLevelx.substring(whichLevelx.length() - 5, whichLevelx.length() - 4));
-                levelNumberx++;
-                whichLevelx = "level" + levelNumberx + ".txt";
+                String whichLevelx = "level" + (levelNumber + 1) + ".txt";
                 LevelFX levelFX = new LevelFX(new File(whichLevelx));
                 try {
                     levelFX.start(stage);
@@ -103,24 +148,41 @@ public class LevelFX extends Application {
 
         MenuItem menuLoad = new MenuItem("Load");
         menuLoad.setOnAction(e -> {
-            saveLoad.load();
+            Level level1 = new Level(new File("level1.txt"));
+            Level level2 = new Level(new File("level2.txt"));
+            Level level3 = new Level(new File("level3.txt"));
+            Level level4 = new Level(new File("level4.txt"));
+            Level level5 = new Level(new File("level5.txt"));
+            Level loadLevel = saveLoad.load();
+
+            ArrayList<Level> levels = new ArrayList<>();
+            levels.add(loadLevel);
+            levels.add(level1);
+            levels.add(level2);
+            levels.add(level3);
+            levels.add(level4);
+            levels.add(level5);
+            boolean isOK = false;
+            for (int j = 1; j < 6; j++) {
+                for (int i = 0; i < 101; i++) {
+                    if (levels.get(0).levelMap[i] != null && levels.get(j).levelMap[i] != null) {
+                        if (levels.get(0).levelMap[i].getClass().equals(levels.get(j).levelMap[i].getClass())) {
+                            isOK = true;
+                        } else {
+                            isOK = false;
+                            break;
+                        }
+                    }
+                }
+                if (isOK) {
+                    levelNumber = j;
+                    break;
+                }
+
+            }
         });
         menuButton.getItems().addAll(menuSave, menuLoad);
         //Menu Button end
-
-        //Score Label Start
-        Label scoreLabel = new Label("Score: " + score);
-        borderPaneTop.setLeft(scoreLabel);
-        //Score Label End
-
-        //Level Label Start
-        if (levelNumber > 0 && levelNumber < 6) {
-            Label levelLabel = new Label("Level: 1");
-            levelLabel.setText("Level: " + levelNumber);
-            borderPaneTop.setRight(levelLabel);
-        }
-        //Level Label End
-
 
         //Center TextFlow start
         BorderPane centerBorderPane = new BorderPane();
@@ -208,7 +270,7 @@ public class LevelFX extends Application {
             if (level.levelMap[i] instanceof City) {
                 int a = ((City) level.levelMap[i]).getName().length();
                 Text cityText = new Text(((City) level.levelMap[i]).getName());
-                double x = (((City) level.levelMap[i]).getCellID() - 1) % 10 * 60 +10;
+                double x = (((City) level.levelMap[i]).getCellID() - 1) % 10 * 60 + 10;
                 double y = (((City) level.levelMap[i]).getCellID() - 1) / 10 * 60 + 70;
 
                 if (a > 7) {
@@ -252,12 +314,12 @@ public class LevelFX extends Application {
 
 
         //images start
-        imagesCreate(pane1, clickedCityText,driveButton);
+        imagesCreate(pane1, clickedCityText, driveButton);
         //images end
 
 
         driveButton.setOnAction(e -> {
-            for (int i = 0; i< circleImages.size(); i++){
+            for (int i = 0; i < circleImages.size(); i++) {
                 circleImages.get(i).setDisable(true);
             }
             driveButton.setDisable(true);
@@ -291,7 +353,7 @@ public class LevelFX extends Application {
             currentCityText.setText(publicMethods.currentCityInformation(level, whereIsVehicle));
             clickedCityText.setText("Clicked City: ");
             //Creating animations
-            List<PathTransition> pathTransitions = publicMethods.createPathTransitions(lines, carImageView, publicMethods.returnCityCell(level.levelMap,whereIsVehicle));
+            List<PathTransition> pathTransitions = publicMethods.createPathTransitions(lines, carImageView, publicMethods.returnCityCell(level.levelMap, whereIsVehicle));
 
             pathTransitions.get(0).play();
             pathTransitions.get(0).setCycleCount(1);
@@ -312,7 +374,7 @@ public class LevelFX extends Application {
             timeline.getKeyFrames().add(keyFrame);
             timeline.setOnFinished(finishedEvent -> {
                 driveButton.setDisable(false);
-                for (int i = 0; i< circleImages.size(); i++){
+                for (int i = 0; i < circleImages.size(); i++) {
                     circleImages.get(i).setDisable(false);
                 }
             });
@@ -323,7 +385,7 @@ public class LevelFX extends Application {
         //Right Side of Scene end
     }
 
-    public void imagesCreate(Pane pane1, Text clickedCityText,Button driveButton) {
+    public void imagesCreate(Pane pane1, Text clickedCityText, Button driveButton) {
         for (int i = 0; i < 101; i++) {
             if (level.levelMap[i] instanceof City) {
                 circleImages.add(publicMethods.createCircleImageView(((City) level.levelMap[i]).getName(), level.levelMap));
@@ -337,14 +399,14 @@ public class LevelFX extends Application {
             int cellID = (int) ((circleImages.get(i).getCenterX() - 30) / 60 + 1 + (circleImages.get(i).getCenterY() - 30) / 60 * 10);
             String cityName = publicMethods.returnCityName(level.levelMap, cellID);
             circleImages.get(i).setOnMouseClicked(e -> {
-                buttonsClicked(cityName, pane1, clickedCityText,driveButton);
+                buttonsClicked(cityName, pane1, clickedCityText, driveButton);
                 pane1.getChildren().removeAll(circleImages);
-                imagesCreate(pane1, clickedCityText,driveButton);
+                imagesCreate(pane1, clickedCityText, driveButton);
             });
         }
     }
 
-    public void buttonsClicked(String cityName, Pane pane1, Text clickedCityText,Button driveButton){
+    public void buttonsClicked(String cityName, Pane pane1, Text clickedCityText, Button driveButton) {
 
         if (toWhere.get().equals(cityName) || whereIsVehicle.equals(cityName)) {
             clickedCityText.setText("Clicked City: ");
