@@ -7,11 +7,10 @@ public class City implements Cloneable{
     int cellID = 0;
     int cityID = 0;
     ArrayList<Passenger> passengerList = new ArrayList<Passenger>();
-    //Image image;
+
 
     public City(String name) {
         this.name=name;
-        //this.image=image;
     }
     public City() {
 
@@ -43,9 +42,7 @@ public class City implements Cloneable{
     public ArrayList<Passenger> getPassengerList() {
         return passengerList;
     }
-//	public Image getImage() {
-//		return image;
-//	}
+
 
 
 }

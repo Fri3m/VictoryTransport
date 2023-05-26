@@ -29,7 +29,7 @@ public class Vehicle {
         return passengerCapacity - getTotalPassenger();
     }
 
-
+    //Driving vehicle between cities
     public PublicMethods drive(City end) {
 
 
@@ -165,7 +165,7 @@ public class Vehicle {
         //ArrayList arrangement end
 
     }
-
+    //Getters
     public int getCellID() {
         return cellID;
     }
