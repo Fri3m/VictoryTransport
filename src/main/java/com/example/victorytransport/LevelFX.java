@@ -243,7 +243,7 @@ public class LevelFX extends Application {
 
         ImageView carImageView = new ImageView(carImage);
 
-        carImageView.setFitWidth(75);
+        carImageView.setFitWidth(90);
         carImageView.setPreserveRatio(true);
         carImageView.setX((((Vehicle) level.levelMap[0]).getCellID() - 1) % 10 * 60 + 50);
         carImageView.setY((((Vehicle) level.levelMap[0]).getCellID() - 1) / 10 * 60 + 50);
@@ -358,6 +358,9 @@ public class LevelFX extends Application {
             KeyFrame keyFrame = new KeyFrame(Duration.millis(2500));
             timeline.getKeyFrames().add(keyFrame);
             timeline.setOnFinished(finishedEvent -> {
+                for(Line line : lines){
+                    line.setVisible(false);
+                }
                 driveButton.setDisable(false);
                 for (int i = 0; i < circleImages.size(); i++) {
                     circleImages.get(i).setDisable(false);
@@ -375,7 +378,24 @@ public class LevelFX extends Application {
             }
             if((((Vehicle)level.levelMap[0]).getPassengerList().size()==0) && !hasPassenger){
                 menuNextLevel.setDisable(false);
+
+
+
             }
+            Pane finishPane = new Pane();
+            Text finishText = new Text("Level Finished");
+            finishText.setLayoutX(50);
+            finishText.setLayoutY(50);
+            finishText.setFont(Font.font("Verdana", FontWeight.BOLD, 30));
+            finishText.setFill(Color.BLACK);
+
+            Stage finishStage = new Stage();
+            Scene finishScene = new Scene(finishPane, 300, 110);
+            finishStage.setScene(finishScene);
+            finishStage.setResizable(false);
+            finishPane.getChildren().add(finishText);
+            finishStage.setTitle("Level Finished");
+            finishStage.show();
         });
         //Drive button end
         //Right Side of Scene end
