@@ -99,7 +99,6 @@ public class LevelFX extends Application {
         MenuItem menuSave = new MenuItem("Save");
         menuSave.setOnAction(e -> {
             saveLoad.save(level);
-            saveLoad.saveWhichLevel("Level1");
         });
 
         MenuItem menuLoad = new MenuItem("Load");
