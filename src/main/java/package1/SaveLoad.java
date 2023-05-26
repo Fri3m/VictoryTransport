@@ -3,8 +3,10 @@ package package1;
 import com.example.victorytransport.*;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class SaveLoad {
     public void save(Level level,double score) {
@@ -57,7 +59,9 @@ public class SaveLoad {
         File scoreFile = new File("scoreFile.txt");
         double score = 0;
         try {
-            score = Double.parseDouble(String.valueOf(scoreFile));
+            Scanner sc = new Scanner(scoreFile);
+            String a = sc.nextLine();
+            score = Double.parseDouble(a);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

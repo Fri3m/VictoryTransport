@@ -132,9 +132,9 @@ public class LevelFX extends Application {
         menuButton.setMinSize(200, 30);
         borderPaneTop.setTop(menuButton);
 
-
+        MenuItem menuNextLevel = new MenuItem("Next Level");
         if ((levelNumber > 0) && (levelNumber < 5)) {
-            MenuItem menuNextLevel = new MenuItem("Next Level");
+            menuNextLevel.setDisable(true);
             menuNextLevel.setOnAction(e -> {
                 System.out.println(levelNumber + 1);
                 String whichLevelx = "level" + (levelNumber + 1) + ".txt";
@@ -364,7 +364,18 @@ public class LevelFX extends Application {
                 }
             });
             timeline.play();
-
+            boolean hasPassenger = false;
+            for(int i = 0; i < 101; i++) {
+                if(level.levelMap[i] instanceof City) {
+                    if(((City) level.levelMap[i]).getPassengerList().size() > 0) {
+                        hasPassenger = true;
+                        break;
+                    }
+                }
+            }
+            if((((Vehicle)level.levelMap[0]).getPassengerList().size()==0) && !hasPassenger){
+                menuNextLevel.setDisable(false);
+            }
         });
         //Drive button end
         //Right Side of Scene end
