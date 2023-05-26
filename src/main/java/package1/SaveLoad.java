@@ -38,7 +38,7 @@ public class SaveLoad {
             throw new RuntimeException(e);
         }
     }
-
+    //Loading level
     public Level load(){
         File saveFile = new File("saveFile.txt");
         Level level = new Level(saveFile);

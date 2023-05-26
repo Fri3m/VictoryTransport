@@ -26,6 +26,7 @@ public class Passenger implements Cloneable {
         passenger.setDistance(distance);
         return passenger;
     }
+    //Getter and setters
     public int getNumberOfPassengers() {
         return numberOfPassengers;
     }
