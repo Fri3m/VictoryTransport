@@ -378,22 +378,20 @@ public class LevelFX extends Application {
             }
             if((((Vehicle)level.levelMap[0]).getPassengerList().size()==0) && !hasPassenger){
                 menuNextLevel.setDisable(false);
-
                 Pane finishPane = new Pane();
                 Text finishText = new Text("Level Finished");
-                finishText.setLayoutX(50);
-                finishText.setLayoutY(50);
+                finishText.setLayoutX(125);
+                finishText.setLayoutY(75);
                 finishText.setFont(Font.font("Verdana", FontWeight.BOLD, 30));
                 finishText.setFill(Color.BLACK);
 
                 Stage finishStage = new Stage();
-                Scene finishScene = new Scene(finishPane, 300, 110);
+                Scene finishScene = new Scene(finishPane, 500, 150);
                 finishStage.setScene(finishScene);
                 finishStage.setResizable(false);
                 finishPane.getChildren().add(finishText);
                 finishStage.setTitle("Level Finished");
                 finishStage.show();
-
             }
 
         });
