@@ -1,12 +1,15 @@
 package com.example.victorytransport;
 
+import javafx.animation.PathTransition;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -20,6 +23,7 @@ public class MainMenu extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+       PublicMethods publicMethods=new PublicMethods();
         //Creating panes and texts
         BorderPane borderPane1 = new BorderPane();
         Scene scene = new Scene(borderPane1, 800, 600);
@@ -50,15 +54,16 @@ public class MainMenu extends Application {
 
 
          //Creating buttons
+        //NewGame button and car animation
         Button newGameButton = new Button("New Game");
-        newGameButton.setMaxWidth(600);
-        newGameButton.setMaxHeight(100);
-        newGameButton.setMinWidth(600);
-        newGameButton.setMinHeight(100);
+        newGameButton.setMaxWidth(400);
+        newGameButton.setMaxHeight(50);
+        newGameButton.setMinWidth(400);
+        newGameButton.setMinHeight(50);
 
-
-        newGameButton.setLayoutX(100);
+        newGameButton.setLayoutX(200);
         newGameButton.setLayoutY(100);
+
         newGameButton.setOnAction(e -> {
             LevelFX levelFX=new LevelFX(new File("level1.txt"));
             try {
@@ -68,14 +73,29 @@ public class MainMenu extends Application {
             }
         });
 
-        Button loadGameButton = new Button("Load Game");
-        loadGameButton.setMaxWidth(600);
-        loadGameButton.setMaxHeight(100);
-        loadGameButton.setMinWidth(600);
-        loadGameButton.setMinHeight(100);
+        Line carLine=new Line();
+        carLine.setStartX(-100);
+        carLine.setStartY(50);
+        carLine.setEndX(900);
+        carLine.setEndY(50);
+        carLine.setVisible(false);
+        Image carImage=new Image(new File("car.png").toURI().toString());
+        ImageView carImageView=new ImageView(carImage);
+        carImageView.setFitWidth(150);
+        carImageView.setPreserveRatio(true);
 
-        loadGameButton.setLayoutX(100);
-        loadGameButton.setLayoutY(230);
+        PathTransition carPath= publicMethods.createPathTransitionsForMainMenu(carLine,carImageView);
+        carPath.setCycleCount(PathTransition.INDEFINITE);
+        carPath.play();
+        //Load button and van animation
+        Button loadGameButton = new Button("Load Game");
+        loadGameButton.setMaxWidth(400);
+        loadGameButton.setMaxHeight(50);
+        loadGameButton.setMinWidth(400);
+        loadGameButton.setMinHeight(50);
+
+        loadGameButton.setLayoutX(200);
+        loadGameButton.setLayoutY(250);
 
         loadGameButton.setOnAction(e -> {
             LevelFX levelFX=new LevelFX(new File("saveFile.txt"));
@@ -86,18 +106,50 @@ public class MainMenu extends Application {
             }
         });
 
-        Button exitButton = new Button("Exit");
-        exitButton.setMaxWidth(600);
-        exitButton.setMaxHeight(100);
-        exitButton.setMinWidth(600);
-        exitButton.setMinHeight(100);
+        Line vanLine=new Line();
+        vanLine.setStartX(-100);
+        vanLine.setStartY(200);
+        vanLine.setEndX(900);
+        vanLine.setEndY(200);
+        vanLine.setVisible(false);
 
-        exitButton.setLayoutX(100);
-        exitButton.setLayoutY(360);
+        Image vanImage=new Image(new File("van.png").toURI().toString());
+        ImageView vanImageView=new ImageView(vanImage);
+        vanImageView.setFitWidth(150);
+        vanImageView.setPreserveRatio(true);
+
+        PathTransition vanPath= publicMethods.createPathTransitionsForMainMenu(vanLine,vanImageView);
+        vanPath.setCycleCount(PathTransition.INDEFINITE);
+        vanPath.play();
+        //Exit button and bus animation
+        Button exitButton = new Button("Exit");
+        exitButton.setMaxWidth(400);
+        exitButton.setMaxHeight(50);
+        exitButton.setMinWidth(400);
+        exitButton.setMinHeight(50);
+
+        exitButton.setLayoutX(200);
+        exitButton.setLayoutY(400);
 
         exitButton.setOnAction(e -> System.exit(0));
 
-        bottomPane.getChildren().addAll(newGameButton, loadGameButton, exitButton);
+        Line busLine=new Line();
+        busLine.setStartX(-100);
+        busLine.setStartY(350);
+        busLine.setEndX(900);
+        busLine.setEndY(350);
+        busLine.setVisible(false);
+
+        Image busImage=new Image(new File("bus.png").toURI().toString());
+        ImageView busImageView=new ImageView(busImage);
+        busImageView.setFitWidth(150);
+        busImageView.setPreserveRatio(true);
+
+        PathTransition busPath= publicMethods.createPathTransitionsForMainMenu(busLine,busImageView);
+        busPath.setCycleCount(PathTransition.INDEFINITE);
+        busPath.play();
+
+        bottomPane.getChildren().addAll(newGameButton, loadGameButton, exitButton,carLine,carImageView,vanLine,vanImageView,busLine,busImageView);
 
         stage.setScene(scene);
         stage.show();
