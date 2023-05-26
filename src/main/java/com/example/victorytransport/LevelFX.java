@@ -20,6 +20,7 @@ import javafx.animation.Timeline;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -29,45 +30,13 @@ public class LevelFX extends Application {
     public LevelFX() {
         levelFile = new File("level1.txt");
         level = new Level(levelFile);
-        levelNumber = 1;
+        levelNumber = calculateLevelNumber(level);
     }
 
     public LevelFX(File levelFile) {
         this.levelFile = levelFile;
         this.level = new Level(levelFile);
-        Level level1 = new Level(new File("level1.txt"));
-        Level level2 = new Level(new File("level2.txt"));
-        Level level3 = new Level(new File("level3.txt"));
-        Level level4 = new Level(new File("level4.txt"));
-        Level level5 = new Level(new File("level5.txt"));
-
-        ArrayList<Level> levels = new ArrayList<>();
-        levels.add(this.level);
-        levels.add(level1);
-        levels.add(level2);
-        levels.add(level3);
-        levels.add(level4);
-        levels.add(level5);
-        boolean isOK = false;
-        for (int j = 1; j < 6; j++) {
-            for (int i = 0; i < 101; i++) {
-                if (levels.get(0).levelMap[i] != null && levels.get(j).levelMap[i] != null) {
-                    if (levels.get(0).levelMap[i].getClass().equals(levels.get(j).levelMap[i].getClass())) {
-                        isOK = true;
-                        System.out.println("OK");
-                    } else {
-                        isOK = false;
-                        System.out.println("Not OK");
-                    }
-                }
-            }
-            if (isOK) {
-                levelNumber = j;
-                break;
-            }
-
-        }
-        levelNumber=0;
+        levelNumber = calculateLevelNumber(level);
     }
 
     PublicMethods publicMethods = new PublicMethods();
@@ -79,8 +48,49 @@ public class LevelFX extends Application {
     ArrayList<Line> lines = new ArrayList<>();
     ArrayList<Circle> circleImages = new ArrayList<>();
 
-    int cost, levelNumber;
+    int cost, levelNumber = 1;
     double score;
+
+    public int calculateLevelNumber(Level level) {
+        Level level1 = new Level(new File("level1.txt"));
+        Level level2 = new Level(new File("level2.txt"));
+        Level level3 = new Level(new File("level3.txt"));
+        Level level4 = new Level(new File("level4.txt"));
+        Level level5 = new Level(new File("level5.txt"));
+
+        ArrayList<Level> levels = new ArrayList<>();
+        levels.add(level1);
+        levels.add(level2);
+        levels.add(level3);
+        levels.add(level4);
+        levels.add(level5);
+        boolean isOK = true;
+        for (int j = 0; j < 5; j++) {
+            for (int i = 0; i < 101; i++) {
+                if (level.levelMap[i] == null && levels.get(j).levelMap[i] == null) {
+                    isOK = true;
+                } else if (level.levelMap[i] != null && levels.get(j).levelMap[i] != null) {
+                    if (level.levelMap[i] instanceof Vehicle && levels.get(j).levelMap[i] instanceof Vehicle)
+                        isOK = true;
+                    else if (level.levelMap[i] instanceof City && (levels.get(j).levelMap[i] instanceof City))
+                        isOK = true;
+                    else if (level.levelMap[i] instanceof Fixed && levels.get(j).levelMap[i] instanceof Fixed)
+                        isOK = true;
+
+                } else {
+                    isOK = false;
+                    break;
+                }
+            }
+            if (isOK) {
+                return j+1;
+            } else {
+                isOK = true;
+            }
+
+        }
+        return 0;
+    }
 
     public void start(Stage stage) throws IOException {
         stage.getIcons().add(new Image(new File("images/icon.png").toURI().toString()));
@@ -123,9 +133,10 @@ public class LevelFX extends Application {
         borderPaneTop.setTop(menuButton);
 
 
-        if (levelNumber > 0 && levelNumber < 5) {
+        if ((levelNumber > 0) && (levelNumber < 5)) {
             MenuItem menuNextLevel = new MenuItem("Next Level");
             menuNextLevel.setOnAction(e -> {
+                System.out.println(levelNumber + 1);
                 String whichLevelx = "level" + (levelNumber + 1) + ".txt";
                 LevelFX levelFX = new LevelFX(new File(whichLevelx));
                 try {
@@ -148,37 +159,11 @@ public class LevelFX extends Application {
 
         MenuItem menuLoad = new MenuItem("Load");
         menuLoad.setOnAction(e -> {
-            Level level1 = new Level(new File("level1.txt"));
-            Level level2 = new Level(new File("level2.txt"));
-            Level level3 = new Level(new File("level3.txt"));
-            Level level4 = new Level(new File("level4.txt"));
-            Level level5 = new Level(new File("level5.txt"));
-            Level loadLevel = saveLoad.load();
-
-            ArrayList<Level> levels = new ArrayList<>();
-            levels.add(loadLevel);
-            levels.add(level1);
-            levels.add(level2);
-            levels.add(level3);
-            levels.add(level4);
-            levels.add(level5);
-            boolean isOK = false;
-            for (int j = 1; j < 6; j++) {
-                for (int i = 0; i < 101; i++) {
-                    if (levels.get(0).levelMap[i] != null && levels.get(j).levelMap[i] != null) {
-                        if (levels.get(0).levelMap[i].getClass().equals(levels.get(j).levelMap[i].getClass())) {
-                            isOK = true;
-                        } else {
-                            isOK = false;
-                            break;
-                        }
-                    }
-                }
-                if (isOK) {
-                    levelNumber = j;
-                    break;
-                }
-
+            LevelFX levelFX=new LevelFX(new File("saveFile.txt"));
+            try {
+                levelFX.start(stage);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
             }
         });
         menuButton.getItems().addAll(menuSave, menuLoad);
@@ -329,7 +314,6 @@ public class LevelFX extends Application {
                 startCellID = publicMethods.returnCityCell(level.levelMap, whereIsVehicle);
                 endCellID = publicMethods.returnCityCell(level.levelMap, toWhere.get());
             }
-
 
             City startCity = (City) level.levelMap[startCellID];
             City endCity = (City) level.levelMap[endCellID];
