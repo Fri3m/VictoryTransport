@@ -3,6 +3,7 @@ package package1;
 public class CityArrangement {
     public CityArrangement() {
     }
+    //Creating city objects
     public  City Istanbul = new City("Istanbul");
     public  City Van=new City("Van");
     public  City Mersin=new City("Mersin");

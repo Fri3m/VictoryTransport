@@ -10,15 +10,13 @@ import java.util.Scanner;
 public class Level {
     ArrayList<Object> levelObjects = new ArrayList<Object>();
     public Object[] levelMap = new Object[101];
-    //ArrayList<Object> levelMap = new ArrayList<Object>();
     public Level() {
-
     }
     public Level(File txtFile) {
         createLevel(txtFile, new CityArrangement());
     }
 
-
+   //Creating level
     public void createLevel(File txtFile,CityArrangement arrangementObject) {
         Scanner fileReader = null;
         try {
@@ -44,7 +42,7 @@ public class Level {
                 objectData = objectData.substring(whereIsComma+1);
 
                 int cityID = Integer.parseInt(objectData);
-
+                //Adding cities to the switch
                 switch (cityName) {
                     case "Istanbul" -> {
                         City Istanbul = arrangementObject.Istanbul.clone();
