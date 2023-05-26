@@ -20,6 +20,7 @@ public class MainMenu extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        //Creating panes and texts
         BorderPane borderPane1 = new BorderPane();
         Scene scene = new Scene(borderPane1, 800, 600);
         stage.setResizable(false);
@@ -48,7 +49,7 @@ public class MainMenu extends Application {
         borderPane1.setBottom(bottomPane);
 
 
-
+         //Creating buttons
         Button newGameButton = new Button("New Game");
         newGameButton.setMaxWidth(600);
         newGameButton.setMaxHeight(100);
