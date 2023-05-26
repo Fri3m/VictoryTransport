@@ -18,28 +18,6 @@ public class Level {
         createLevel(txtFile, new CityArrangement());
     }
 
-    public static void main(String[] args) {
-        File txt = null;
-        try {
-            txt = new File("level1.txt");
-
-
-        } catch (Exception e) {
-            System.out.println("txt File not found");
-        }
-        try {
-            Level a= new Level(txt);
-            for (int i = 1; i < a.levelMap.length; i++) {
-
-                System.out.println(i + " "+a.levelMap[i]);
-            }
-
-        } catch (Exception e) {
-
-        }
-
-    }
-
 
     public void createLevel(File txtFile,CityArrangement arrangementObject) {
         Scanner fileReader = null;

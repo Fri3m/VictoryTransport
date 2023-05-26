@@ -16,14 +16,6 @@ public class Passenger implements Cloneable {
         this.destinationCityID = destinationCityID;
 
     }
-    private void enterVehicle(int vehicleCapacity) {
-        for(int i=0;i<vehicleCapacity;i++){
-            numberOfPassengers--;
-            if(numberOfPassengers==0){
-                break;
-            }
-        }
-    }
     public Passenger clone(){
         Passenger passenger = new Passenger(numberOfPassengers,startingCityID,destinationCityID);
         passenger.setDistance(getDistance());
