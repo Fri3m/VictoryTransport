@@ -3,9 +3,9 @@
 
 Victory Transport
 
-•	Ömer Can Şimşek
-•	Ömer Yıldırım
-•	Batuhan Kurt 
+•	Ömer Can Şimşek // Fri3m
+•	Ömer Yıldırım // OmerrYildirim
+•	Batuhan Kurt // batukurt1203
 
 
 CSE1242 Computer Programming II, Spring 2023
